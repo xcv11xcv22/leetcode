@@ -1,0 +1,26 @@
+class Solution {
+    public int reverse(int x) {
+        String str = Integer.toString(x);
+        char[] arr = str.toCharArray();
+        int value= 0;
+        int start = 0;
+        int powIndex = 0;
+        if (x < 0){
+          start = 1;
+            powIndex = -1;
+        }
+        for(int i = start; i < arr.length ; i++){
+           if (value + (Math.pow(10, i + powIndex) * Character.getNumericValue(arr[i])) > Integer.MAX_VALUE){
+
+                return 0;
+            }
+            value += (Math.pow(10, i + powIndex) * Character.getNumericValue(arr[i]));
+            
+        } 
+        if (start == 1){
+            value = 0 - value;
+        }
+        
+        return value;
+    }
+}

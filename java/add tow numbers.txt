@@ -1,0 +1,66 @@
+/* -----------------------------------
+ *  WARNING:
+ * -----------------------------------
+ *  Your code may fail to compile
+ *  because it contains public class
+ *  declarations.
+ *  To fix this, please remove the
+ *  "public" keyword from your class
+ *  declarations.
+ */
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+         
+        String value = "";
+        int add = 0;
+        while ( l1 != null || l2 != null){
+            int v = 0;
+           
+            if (l1 != null){
+                v += l1.val ;
+                l1 = l1.next;
+            }
+            if (l2 != null){
+                v += l2.val ;
+                l2 = l2.next;
+            }
+            v += add;
+            value += Integer.toString(v % 10);
+            if (v >= 10){
+                 add = (int) v/10;
+            }
+            else
+                add = 0;
+        }
+        if (add != 0){
+            value += Integer.toString(add);
+        }
+        char [] arr = value.toCharArray() ;
+        ListNode tmp = null;
+        ListNode head = null;
+        for(int i = 0 ; i < arr.length ; i++){
+            
+            if (tmp == null){
+                tmp = new ListNode(Character.getNumericValue(arr[i]));
+                head = tmp;
+            }
+            else{
+                ListNode node = new ListNode(Character.getNumericValue(arr[i]));
+                tmp.next = node;
+                tmp = tmp.next;
+            }
+            
+        }
+        return  head;
+        
+    }
+}

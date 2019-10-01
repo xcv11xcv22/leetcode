@@ -1,0 +1,44 @@
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        ArrayList<List<Integer>> result = new ArrayList<List<Integer>>();
+        if (nums.length < 3)
+            return result;
+        Arrays.sort(nums);
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        System.out.println(Arrays.toString(nums));
+        for(int i = 0; i < nums.length; i++){
+            if(i > 0 && nums[i] == nums[i-1]){
+                continue;
+            }
+            System.out.println(nums[i]);
+            int target = 0 - nums[i];
+            for(int j = i+1 ; j < nums.length; j++){
+                int number_j = nums[j];
+                if (map.containsKey(target-number_j) 
+                     && i < map.get(target-number_j) && map.get(target-number_j) < j   ){
+               
+                    ArrayList<Integer> tmp = new ArrayList<Integer>();
+                    tmp.add(nums[i]);
+                    tmp.add(target-number_j);
+                    tmp.add(number_j);
+                    result.add(tmp);
+                    while (j+1 < nums.length && nums[j] == nums[j+1]   ){
+                        j++;
+                    }    
+                }
+                else{
+                    if (!map.containsKey(number_j))
+                        map.put(number_j, j);
+                    else{
+                        if(nums[map.get(number_j)] == number_j){
+                             map.put(number_j, j);
+                        }
+                    }
+                }
+            }
+            
+        }
+       
+        return result;
+    }
+}
